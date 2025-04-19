@@ -26,7 +26,7 @@ E-Kart/ ├── index.html ├── cart.html ├── order-summary.html �
 5) ![Screenshot 2025-04-19 082758](https://github.com/user-attachments/assets/6c29c904-a0e2-4911-abeb-c168f93c7326)
 
 ## 🌐 Live Demo
-[Click here to view](https://github.com/Devanshkulsh/E-Kart)
+[Click here to view](https://devanshkulsh.github.io/E-Kart/)
 
 ## 🛠️ Setup & Run Locally
 1) Download the files and extract them.
