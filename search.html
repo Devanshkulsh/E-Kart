@@ -57,7 +57,7 @@
 
     <!-- Product List -->
     <section id="product-list-section" class="section-p1">
-        <div id="product-list" onclick="window.location.href='singleProduct.html';">
+        <div id="product-list">
 
         </div>
     </section>
@@ -95,24 +95,20 @@
         function displayProducts(filteredProducts) {
             const productList = document.getElementById('product-list');
             productList.innerHTML = '';
-
             filteredProducts.forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.classList.add('product-card');
                 productCard.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" />
-                    <h5>${product.name}</h5>
-                    <p>₹ ${product.price}</p>
-                `;
-                productList.appendChild(productCard);
+                <img src="${product.image}" alt="${product.name}" class="product-img" />
+                <h5>${product.name}</h5>
+                <p>₹ ${product.price}</p>`;
+                productCard.querySelector('.product-img').addEventListener('click', () => {
+                window.location.href = 'singleProduct.html';
             });
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            displayProducts(products);
+                productList.appendChild(productCard);
         });
-
-        // Search functionality
+    }
+        // Search 
         document.getElementById('search-input').addEventListener('input', function () {
             const query = this.value.toLowerCase();
             const filteredProducts = products.filter(product =>
