@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Kart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning sticky-top shadow-sm px-3">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold fs-3" href="index.html">
+                <img src="assets/images/Logo Final.png" height="60" width="150" alt="E-Kart" class="me-2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+
+                <form class="d-flex me-3" role="search" onsubmit="searchRedirect(event)">
+                    <input class="form-control me-2" type="search" id="search-input"
+                        placeholder="Search for products..." aria-label="Search">
+                    <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+
+                <div class="d-flex">
+                    <a href="cart.html" class="btn btn-outline-dark me-2 active">
+                        <i class="bi bi-cart"></i>
+                        <span id="cart-count" class="badge bg-danger">0</span>
+                    </a>
+
+                    <a href="#" class="btn btn-outline-dark"><i class="bi bi-person-circle"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Carousel Section -->
+    <section id="carousel-product" class="text-white text-start">
+    </section>
+
+    <!-- Item Table -->
+
+    <section id="cart" class="section-p1 table">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td>Remove</td>
+                    <td>Image</td>
+                    <td>Product</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>Subtotal</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="#" class="remove-item"><i class="bi bi-x"></i></a></td>
+                    <td><img src="assets/images/products/p2.jpg"></td>
+                    <td>Men's Developer T Shirt</td>
+                    <td>₹ 599</td>
+                    <td><input type="number" value="1"></td>
+                    <td>Total</td>
+                </tr>
+                <tr>
+                    <td><a href="#" class="remove-item"><i class="bi bi-x"></i></a></td>
+                    <td><img src="assets/images/products/p8.jpg"></td>
+                    <td>Men's Developer T Shirt</td>
+                    <td>₹ 799</td>
+                    <td><input type="number" value="1"></td>
+                    <td>Total</td>
+                </tr>
+                <tr>
+                    <td><a href="#" class="remove-item"><i class="bi bi-x"></i></a></td>
+                    <td><img src="assets/images/products/p3.jpg"></td>
+                    <td>Men's Developer T Shirt</td>
+                    <td>₹ 999</td>
+                    <td><input type="number" value="1"></td>
+                    <td>Total</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Total/Checkout -->
+
+    <section id="cart-add" class="section-p1">
+        <div id="coupon">
+            <h3>Have a Promo?</h3>
+            <div>
+                <input type="text" placeholder="Enter your coupon code here...">
+                <button class="normal">Apply</button>
+            </div>
+        </div>
+        <div id="subtotal">
+            <h3>Cart Total</h3>
+            <table>
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td id="subtotal-price">Price</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>Price</strong></td>
+                </tr>
+            </table>
+            <button id="submit-order" class="btn normal">Check Out</button>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="assets/images/Logo Final.png" height="60" width="150">
+            <h4>Contact Us</h4>
+            <p><strong>Address:</strong> xyz, xyz</p>
+            <p><strong>Phone:</strong> +91 0123456789</p>
+            <p><strong>Hours:</strong> 09:00 - 17:00, Mon - Sat</p>
+        </div>
+
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play</p>
+            <div class="d-flex flex-wrap gap-3">
+                <img class="store-btn" src="assets/images/Footer/apple_store.webp">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="assets/images/Footer/payments.png">
+        </div>
+    </footer>
+
+
+    <!-- Cart total, removal and icon function -->
+
+    <script>
+        const productPrices = [599, 799, 999];
+
+        function updateCartTotal() {
+            const rows = document.querySelectorAll('section#cart tbody tr');
+            let total = 0;
+
+            rows.forEach((row, index) => {
+                const price = productPrices[index];
+                const quantityInput = row.querySelector('input[type="number"]');
+                const quantity = parseInt(quantityInput.value) || 0;
+                const subtotal = price * quantity;
+                total += subtotal;
+
+                const subtotalCell = row.querySelector('td:last-child');
+                subtotalCell.innerText = `₹${subtotal}`;
+            });
+
+            document.getElementById('subtotal-price').innerText = `₹${total}`;
+            document.querySelector('#subtotal table tr:last-child td:last-child').innerHTML = `<strong>₹${total}</strong>`;
+
+            document.getElementById('cart-count').innerText = rows.length;
+        }
+
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('change', () => {
+                updateCartTotal();
+            });
+        });
+
+        document.querySelectorAll('.remove-item').forEach((btn, index) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                btn.closest('tr').remove();
+                productPrices.splice(index, 1);
+                updateCartTotal();
+            });
+        });
+
+        updateCartTotal();
+    </script>
+
+
+    <!-- Search Function -->
+    <script>
+        function searchRedirect(event) {
+            event.preventDefault();
+            const query = document.getElementById('search-input').value;
+            if (query) {
+                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+            } else {
+                alert('Please enter a search term');
+            }
+        }
+
+    </script>
+
+
+
+    <!-- Order page -->
+    <script>
+        document.getElementById('submit-order').addEventListener('click', function () {
+            const rows = document.querySelectorAll('section#cart tbody tr');
+            const orderItems = [];
+            let total = 0;
+
+            rows.forEach((row, i) => {
+                const name = row.children[2].innerText;
+                const quantity = row.querySelector('input[type="number"]').value;
+                const subtotal = parseInt(productPrices[i]) * parseInt(quantity);
+                total += subtotal;
+                orderItems.push({ name, quantity, subtotal });
+            });
+
+            localStorage.setItem('orderItems', JSON.stringify(orderItems));
+            localStorage.setItem('orderTotal', total);
+            window.location.href = 'order-summary.html';
+        });
+
+    </script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
